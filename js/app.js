@@ -1,0 +1,108 @@
+
+//board is made and all cell ids are placed into an array
+var body = document.getElementsByTagName('body');
+var board = document.createElement('div');
+
+  var $tiles = [];
+  var body = document.getElementsByTagName('body')[0];
+  var tbl = document.createElement('table');
+  tbl.style.width = '500px';
+  tbl.style.width = '500px';
+  tbl.setAttribute('border', '1');
+  var tbdy = document.createElement('tbody');
+  for (var i = 1; i < 11; i++) {
+      var tr = document.createElement('tr');
+      for (var j = 1; j < 11; j++) {
+              var td = document.createElement('td');
+              td.style.width = '50px';
+              td.style.height = '50px';
+              td.id = (i + "," + j);
+              $("td").val("");
+              tr.appendChild(td);
+              $tiles.push(td.id);
+          }
+      tbdy.appendChild(tr);
+  }
+  tbl.appendChild(tbdy);
+  body.appendChild(tbl);
+
+
+
+//-----------------------------------------------------------------------------------------
+
+//loop to set ships positions on grid
+var $ships = [];
+
+for (var i=0;i<3;i++)
+ {var randomIndex = Math.floor(Math.random() * $tiles.length);
+  var $ship = $tiles[randomIndex];
+  
+  if ($ships[0] === $ship || $ships[1] === $ship) {
+    var randomIndex = Math.floor(Math.random() * $tiles.length);
+     var $ship = $tiles[randomIndex];
+  }
+      $ships.push($ship);
+      console.log($ships);
+      randomIndex = [];
+    }
+
+
+
+
+//
+//   var aircraftCarrier = 5;
+//   var battleship  = 3;
+//   var cruiser = 2;
+//   var cruiser2 = 2;
+//   var destroyer = 1;
+// //
+// var isHorizontal = ;
+// var isVertical = ;
+
+
+//create loop for each ship to set its place on board
+
+// for (i = 0; i < aircraftCarrier.length; i++) {
+// var position = cells[randomIndex];
+// if cell
+// }
+//
+
+// var setVal = function() {
+//   $()val("HIT") ;
+// };
+//
+// $.each($ships, setVal);
+
+
+
+
+
+
+// //function to mark tiles either hit or miss // if (this) is in the array of ships (!index of -1 of [ships]), var cellchosen = hit image
+// // else cellchosen = miss image
+var isHit = function() {
+  console.log(this.id);
+  if ($.inArray(this.id, $ships) != -1) {
+    $(this).html("HIT");
+  }
+  else $(this).html("MISS");
+};
+// //click event listener for tiles on board
+$("td").on("click", isHit);
+
+
+
+
+//
+// to determine if orientation is possible
+// i % width = 0 not
+// i % width = -1 its one on the edge
+
+///find an empty square
+//pos = tiles {mathfloormathrandom} etc
+//while pos val = none
+// is vertical/horizontal mathfloormathrabdom*2 ===1 etc
+// decide orientation - if valid good, if not change orirtation else pick new square
+// pick a ship to put there
+// place the ship
