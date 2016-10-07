@@ -10,16 +10,15 @@ var board = document.createElement('div');
   tbl.style.width = '500px';
   tbl.setAttribute('border', '1');
   var tbdy = document.createElement('tbody');
-  for (var i = 1; i < 11; i++) {
+  for (var i = 0; i < 10; i++) {
       var tr = document.createElement('tr');
-      for (var j = 1; j < 11; j++) {
+      for (var j = 0; j < 10; j++) {
               var td = document.createElement('td');
               td.style.width = '50px';
               td.style.height = '50px';
-              td.id = (i + "," + j);
-              $("td").val("");
+              td.id = ("" + i + j);
               tr.appendChild(td);
-              $tiles.push(td.id);
+              $tiles.push(td);
           }
       tbdy.appendChild(tr);
   }
@@ -31,21 +30,55 @@ var board = document.createElement('div');
 //-----------------------------------------------------------------------------------------
 
 //loop to set ships positions on grid
+var ship = "123";
 var $ships = [];
-
-for (var i=0;i<3;i++)
- {var randomIndex = Math.floor(Math.random() * $tiles.length);
-  var $ship = $tiles[randomIndex];
-  
-  if ($ships[0] === $ship || $ships[1] === $ship) {
-    var randomIndex = Math.floor(Math.random() * $tiles.length);
-     var $ship = $tiles[randomIndex];
+var $startingShips = ["ds", "crs", "crs", "btsp", "arcft"];
+  var randomIndex = Math.floor(Math.random() * $tiles.length);
+  var $pos = $("td")[randomIndex];
+  for (var i = 0; i < ship.length; i++) {
+    $("td")[randomIndex + (10*(i))].class = "HIT";
   }
-      $ships.push($ship);
-      console.log($ships);
-      randomIndex = [];
-    }
+  console.log($("td")[randomIndex + 10]);
+  console.log($pos);
+  console.log(+($pos.id));
+  console.log($pos.class);
+  var canAIPlace = (+($pos.id));
+  console.log(+($pos.id) + 10);
+//   while ($pos.class === "sea");
+//     for (var j = 0; j < $startingShips[].length; j ++) {
+// $startingShips[i]}
+//
+// // for each ship, check length.
+// for (var i = 0; i < ship.length; i++) {
+// var checksquare = (+($pos.id) + (10*[i]));
+// if checksquare ===   }
+// //
 
+// var isVertical = if +$pos.id +10 === class of sea then mark pos and pos2 as class of hit
+//
+// id1 = (+($pos.id) +10);
+// console.log(id1);
+// console.log($tiles.indexOf(id1));
+// var orientation = "";
+// if (Math.floor(Math.random()*2) === 1) orientation = isVertical;
+// else orientation = isHorizontal;
+// console.log(orientation);
+
+
+//
+// for (var i = 0; ; i ++)
+//  {var randomIndex = Math.floor(Math.random() * $tiles.length);
+//   var $ship = $tiles[randomIndex];
+//
+//   if ($ships[0] === $ship || $ships[1] === $ship) {
+//     var randomIndex = Math.floor(Math.random() * $tiles.length);
+//      var $ship = $tiles[randomIndex];
+//   }
+//       $ships.push($ship);
+//       console.log($ships);
+//       randomIndex = [];
+// //     }
+//
 
 
 
@@ -82,8 +115,8 @@ for (var i=0;i<3;i++)
 // //function to mark tiles either hit or miss // if (this) is in the array of ships (!index of -1 of [ships]), var cellchosen = hit image
 // // else cellchosen = miss image
 var isHit = function() {
-  console.log(this.id);
-  if ($.inArray(this.id, $ships) != -1) {
+  console.log(this.id, this.class);
+  if (this.class === "HIT") {
     $(this).html("HIT");
   }
   else $(this).html("MISS");
