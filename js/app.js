@@ -62,28 +62,53 @@ var ship = "123";
 //      }}}
 //   }
 // };
-// 
+//
 // chooseVertical();
+
+
+// var chooseHorizontal = function() {
+//   var randomIndex = Math.floor(Math.random() * $tiles.length);
+//   var $pos = $("td")[randomIndex];
+//   console.log(+$pos.id + ship.length -1);
+// if (+$pos.id + ((+ship.length-1)) > 99)
+//  { $pos = ""; randomIndex = ""; chooseHorizontal();}
+//  else {
+//    while ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex].class !== false)  {
+//      for (var i = 0; i < ship.length; i++) {
+//        if ($("td")[randomIndex + (i)].class === "SEA")
+//        {$("td")[randomIndex + (i)].class = "HIT";
+//      }}}
+//   }
+// };
+//
 
 
 var chooseHorizontal = function() {
   var randomIndex = Math.floor(Math.random() * $tiles.length);
   var $pos = $("td")[randomIndex];
-  console.log($pos);
-if (+$pos.id + (10*(+ship.length-1)) > 99)
- { $pos = ""; randomIndex = ""; chooseHorizontal();}
- else {
-   while ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex].class !== false)  {
-     for (var i = 0; i < ship.length; i++) {
-       if ($("td")[randomIndex + (10*(i))].class === "SEA")
-       {$("td")[randomIndex + (10*(i))].class = "HIT";
-     }}}
-  }
-};
+  console.log(+$pos.id);
+for (p = 0; p < ship.length; p ++) {
+  var string = (+$pos.id + (p)).toString();
+  console.log(string);
+  if (string.includes("9"))
+  { $pos = ""; randomIndex = ""; chooseHorizontal();}
+  else {
+    while ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex].class !== false)  {
+      for (var i = 0; i < ship.length; i++) {
+        if ($("td")[randomIndex + (i)].class === "SEA")
+        {$("td")[randomIndex + (i)].class = "HIT";
+      }}}
+
+}}};
 
 chooseHorizontal();
 
 
+
+
+// var isValid = function() {
+//
+// } ;
 
 
 
