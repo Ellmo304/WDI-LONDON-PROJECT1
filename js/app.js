@@ -16,6 +16,7 @@ var board = document.createElement('div');
               var td = document.createElement('td');
               td.style.width = '50px';
               td.style.height = '50px';
+              td.class = "SEA";
               td.id = ("" + i + j);
               tr.appendChild(td);
               $tiles.push(td);
@@ -30,20 +31,113 @@ var board = document.createElement('div');
 //-----------------------------------------------------------------------------------------
 
 //loop to set ships positions on grid
-var ship = "123";
-var $ships = [];
 var $startingShips = ["ds", "crs", "crs", "btsp", "arcft"];
+
+// var ship = "123";
+//
+//   var randomIndex = Math.floor(Math.random() * $tiles.length);
+//   var $pos = $("td")[randomIndex];
+// console.log(+$pos.id + (10*(+ship.length-1)));
+// while ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex].class !== false)  {
+//   for (var i = 0; i < ship.length; i++) {
+//     if ($("td")[randomIndex + (10*(i))].class === "SEA")
+//     {$("td")[randomIndex + (10*(i))].class = "HIT";
+//   }
+//
+//   }}
+
+var ship = "123";
+
+// var chooseVertical = function() {
+//   var randomIndex = Math.floor(Math.random() * $tiles.length);
+//   var $pos = $("td")[randomIndex];
+//   console.log($pos);
+// if (+$pos.id + (10*(+ship.length-1)) > 99)
+//  { $pos = ""; randomIndex = ""; chooseVertical();}
+//  else {
+//    while ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex].class !== false)  {
+//      for (var i = 0; i < ship.length; i++) {
+//        if ($("td")[randomIndex + (10*(i))].class === "SEA")
+//        {$("td")[randomIndex + (10*(i))].class = "HIT";
+//      }}}
+//   }
+// };
+// 
+// chooseVertical();
+
+
+var chooseHorizontal = function() {
   var randomIndex = Math.floor(Math.random() * $tiles.length);
   var $pos = $("td")[randomIndex];
-  for (var i = 0; i < ship.length; i++) {
-    $("td")[randomIndex + (10*(i))].class = "HIT";
-  }
-  console.log($("td")[randomIndex + 10]);
   console.log($pos);
-  console.log(+($pos.id));
-  console.log($pos.class);
-  var canAIPlace = (+($pos.id));
-  console.log(+($pos.id) + 10);
+if (+$pos.id + (10*(+ship.length-1)) > 99)
+ { $pos = ""; randomIndex = ""; chooseHorizontal();}
+ else {
+   while ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex].class !== false)  {
+     for (var i = 0; i < ship.length; i++) {
+       if ($("td")[randomIndex + (10*(i))].class === "SEA")
+       {$("td")[randomIndex + (10*(i))].class = "HIT";
+     }}}
+  }
+};
+
+chooseHorizontal();
+
+
+
+
+
+
+
+
+//   var ship = "123";
+//
+//   var randomIndex = Math.floor(Math.random() * $tiles.length);
+//   var $pos = $("td")[randomIndex];
+// console.log($pos);
+//
+// var searchForPos = function() {
+//
+// if ($("td")[randomIndex].class !== undefined) {
+//   if ($("td")[randomIndex].class === "SEA")  {
+//     for (var i = 0; i < ship.length; i++) {
+//       if ($("td")[randomIndex + (10*(i))].class === "SEA")
+//       {$("td")[randomIndex + (10*(i))].class = "HIT";
+//     }}
+// }} else randomIndex = ""; $pos = ""; randomIndex = Math.floor(Math.random() * $tiles.length);
+//  $pos = $("td")[randomIndex]; searchForPos();
+//
+//
+// };
+
+// searchForPos();
+
+
+  // var ship = [1, 2, 3];
+  // console.log(ship.length);
+  //   var randomIndex = Math.floor(Math.random() * $tiles.length);
+  //   var $pos = $("td")[randomIndex];
+  //   console.log($pos.class);
+  //   for (var i = 0; i < ship.length; i++) {
+  //     console.log($pos);
+  //     console.log($("td")[randomIndex].class);
+  //     if ($("td")[randomIndex].class === "SEA" && $("td")[randomIndex + (10*(i))].class === "SEA")
+  //     { $("td")[randomIndex].class = "HIT"; $("td")[randomIndex + (10*(i))].class = "HIT" ;
+  //
+  //   }}
+
+
+
+
+  // console.log($("td")[randomIndex + 10]);
+
+  // console.log(+($pos.id));
+  // console.log($pos.class);
+  // var canAIPlace = (+($pos.id));
+  // console.log(+($pos.id) + 10);
+
+
+
 //   while ($pos.class === "sea");
 //     for (var j = 0; j < $startingShips[].length; j ++) {
 // $startingShips[i]}
