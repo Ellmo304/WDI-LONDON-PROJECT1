@@ -15,3 +15,21 @@ table {
   height: 50px;
   width: 50px;
 }
+
+
+.sea {
+  background-color: lightblue;
+
+}
+
+.hit {
+  background-color: red;
+}
+
+#battleLog {
+
+display: block;
+background-color: black;
+color: #00ff00;
+font-family: "Courier New";
+}
