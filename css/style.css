@@ -2,12 +2,14 @@ td {
   border: 1px solid black;
   border-collapse: collapse;
   width: 500px;
+
   height: 500px;
   color: black;
 }
 
 table {
   background-color: lightblue;
+    margin-left: 20px;
 }
 
 . cell {
@@ -27,7 +29,11 @@ table {
 }
 
 #battleLog {
-
+height: 100px;
+width: 500px;
+line-height: 50px;
+margin: 20px;
+text-align: center;
 display: block;
 background-color: black;
 color: #00ff00;
