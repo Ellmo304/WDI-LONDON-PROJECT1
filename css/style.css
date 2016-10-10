@@ -1,15 +1,36 @@
+#wrapper {
+  margin: 0 auto;
+  width: 1100px;
+}
+
+#board {
+  height: 510px;
+  width: 510px;
+  margin-left: 40px;
+  display: inline-block;
+  margin-top: -500px;
+}
+#board2 {
+  height: 510px;
+  width: 510px;
+  display: inline-block;
+}
+
+
+
 td {
   border: 1px solid black;
   border-collapse: collapse;
   width: 500px;
-
   height: 500px;
   color: black;
 }
 
 table {
+
   background-color: lightblue;
     margin-left: 20px;
+    padding: 20px;
 }
 
 . cell {
@@ -21,7 +42,6 @@ table {
 
 .sea {
   background-color: lightblue;
-
 }
 
 .hit {
@@ -34,8 +54,31 @@ width: 500px;
 line-height: 50px;
 margin: 20px;
 text-align: center;
-display: block;
+display: inline-block;
 background-color: black;
 color: #00ff00;
 font-family: "Courier New";
+}
+
+#battleLog2 {
+
+height: 100px;
+width: 500px;
+line-height: 50px;
+margin: 20px;
+text-align: center;
+display: inline-block;
+background-color: black;
+color: #00ff00;
+font-family: "Courier New";
+}
+
+h1 {
+  text-align: center;
+  padding: 10px;
+}
+
+button {
+  display: inline-block;
+  padding: 10px;
 }
