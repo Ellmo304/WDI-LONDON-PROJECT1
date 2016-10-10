@@ -1,80 +1,57 @@
+#battleLog, #battleLog2 {
+height: 100px;
+width: 500px;
+line-height: 50px;
+text-align: center;
+display: inline-block;
+background-color: black;
+color: #00ff00;
+font-family: "Courier New";
+}
+
 #wrapper {
   margin: 0 auto;
   width: 1100px;
 }
 
-#board {
-  height: 510px;
-  width: 510px;
-  margin-left: 40px;
+.board {
+  width: 505px;
   display: inline-block;
-  margin-top: -500px;
+  padding: 10px;
 }
-#board2 {
-  height: 510px;
-  width: 510px;
-  display: inline-block;
-}
-
-
 
 td {
   border: 1px solid black;
-  border-collapse: collapse;
-  width: 500px;
-  height: 500px;
+  width: 50px;
+  height: 50px;
   color: black;
 }
 
-table {
-
+#playerBoard {
   background-color: lightblue;
-    margin-left: 20px;
-    padding: 20px;
+
+    display: inline-block;
+
 }
 
-. cell {
-  background: blue;
-  height: 50px;
-  width: 50px;
+#cpuBoard {
+  background-color: lightblue;
+    display: inline-block;
 }
-
 
 .sea {
   background-color: lightblue;
-}
+
+.hover {
+  background-color: lime;}
 
 .hit {
-  background-color: red;
-}
-
-#battleLog {
-height: 100px;
-width: 500px;
-line-height: 50px;
-margin: 20px;
-text-align: center;
-display: inline-block;
-background-color: black;
-color: #00ff00;
-font-family: "Courier New";
-}
-
-#battleLog2 {
-
-height: 100px;
-width: 500px;
-line-height: 50px;
-margin: 20px;
-text-align: center;
-display: inline-block;
-background-color: black;
-color: #00ff00;
-font-family: "Courier New";
+background-color: red;
 }
 
 h1 {
   text-align: center;
+
   padding: 10px;
 }
 
