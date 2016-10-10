@@ -1,10 +1,11 @@
 #battleLog, #battleLog2 {
 height: 100px;
-width: 500px;
+width: 504px;
 line-height: 50px;
 text-align: center;
 display: inline-block;
 background-color: black;
+margin: 10px;
 color: #00ff00;
 font-family: "Courier New";
 }
@@ -39,9 +40,6 @@ td {
     display: inline-block;
 }
 
-.sea {
-  background-color: lightblue;
-
 .hover {
   background-color: lime;}
 
@@ -50,10 +48,15 @@ background-color: red;
 }
 
 h1 {
+  display: inline;
+  margin-left: 200px;
   text-align: center;
-
+font-size: 20px;
   padding: 10px;
 }
+
+#cpuHeader {
+  margin-left: 440px;}
 
 button {
   display: inline-block;

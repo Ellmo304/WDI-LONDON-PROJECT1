@@ -113,6 +113,7 @@ $("#CRS").on("click", positionHorizontal);
 $("#CR2").on("click", positionHorizontal);
 $("#DS").on("click", positionHorizontal);
 
+
         //function to add click listener to rotate bytton to choose vertical or horizontal position.
 
 // var rotateClicks = 0;
