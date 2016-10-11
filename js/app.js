@@ -37,7 +37,9 @@ var winNoise = new Audio("../audio/win.wav");
 var lossNoise = new Audio("../audio/loss.wav");
 var buttonOn = new Audio("../audio/buttonOn.wav");
 var buttonOff = new Audio("../audio/buttonOff.wav");
-
+var sunkCPU = new Audio("../audio/sunk1.wav");
+var sunkHuman = new Audio("../audio/sunk3.wav");
+var shipSunk = new Audio("../audio/shipSunk.wav");
 
 $(".sea").text("SEA");
 $(".miss").text("MISS");
@@ -52,8 +54,8 @@ $rotateBtn.on('click', function() {
 });
 
 function selectShip() {
-  buttonOn.play(); buttonOn.currentTime = 0;
   shipsSelected++;
+  buttonOn.play(); buttonOn.currentTime = 0;
   ship = $(this).attr('id');
   $(this).prop('disabled', true);
 
@@ -75,6 +77,7 @@ function selectShip() {
 
   $playerBoard.on("click", "td", function() {
     if(placeShip($playersTiles.index(this), ship, playerShipIsHorizontal, $playersTiles)) {
+
       $playerBoard.off("mouseout").off("mouseover"); buttonOff.play(); buttonOff.currentTime = 0;
     }
   });
@@ -151,7 +154,7 @@ function checkForWin() {
     $battleLog.text("You've sunk the opposition!!! Player 1 IS VICTORIOUS!!!");
     $cpuBattleLog.text("CPU loses!!!");
   }
-  else {setTimeout(cpusChoice, 1000);
+  else {setTimeout(cpusChoice, 1750);
   }
 }
 
@@ -187,22 +190,27 @@ function isHit() {
 splashNoise.play(); splashNoise.currentTime = 0; }
   if (myACFCRcounter === 5) {
     $battleLog.text("You sank CPU'S aircraft carrier!");
+    shipSunk.play(); shipSunk.currentTime = 0;
     setTimeout(1000); myACFCRcounter ++;
   }
   else if (myBTSPcounter === 4) {
     $battleLog.text("You sank CPU's battleship!");
+    sunkCPU.play(); sunkCPU.currentTime = 0;
     setTimeout(1000); myBTSPcounter ++;
   }
   else if (myCR1counter === 3) {
     $battleLog.text("You sank CPU's cruiser!");
+    shipSunk.play(); shipSunk.currentTime = 0;
     setTimeout(1000); myCR1counter ++;
   }
   else if (myCR2counter === 3) {
     $battleLog.text("You sank CPU's cruiser!");
+    shipSunk.play(); shipSunk.currentTime = 0;
     setTimeout(1000); myCR2counter ++;
   }
   else if (myDScounter === 2) {
     $battleLog.text("You sank CPU's destroyer!");
+    shipSunk.play(); shipSunk.currentTime = 0;
     setTimeout(1000); myDScounter ++;
   }
   checkForWin();
@@ -241,7 +249,7 @@ function checkForCpuWin() {
     $battleLog.text("All your ships have been sunk! You have been defeated!!!");
     $cpuBattleLog.text("CPU IS VICTORIOUS!!!");
   }
-  else { setTimeout(playersTurn, 1000);
+  else { setTimeout(playersTurn, 1750);
   }
 }
 
@@ -274,22 +282,27 @@ function cpuFire(){
 
     if (ACFCRcounter === 5) {
       $cpuBattleLog.text("CPU sank your aircraft carrier!");
+      shipSunk.play(); shipSunk.currentTime = 0;
       setTimeout(1000); ACFCRcounter ++;
     }
     else if (BTSPcounter === 4) {
       $cpuBattleLog.text("CPU sank your battleship!");
+      sunkHuman.play(); sunkHuman.currentTime = 0;
       setTimeout(1000); BTSPcounter ++;
     }
     else if (CR1counter === 3) {
       $cpuBattleLog.text("CPU sank your cruiser!");
+      shipSunk.play(); shipSunk.currentTime = 0;
       setTimeout(1000); CR1counter ++;
     }
     else if (CR2counter === 3) {
       $cpuBattleLog.text("CPU sank your cruiser!");
+      shipSunk.play(); shipSunk.currentTime = 0;
       setTimeout(1000); CR2counter ++;
     }
     else if (DScounter === 2) {
       $cpuBattleLog.text("CPU sank your destroyer!");
+      shipSunk.play(); shipSunk.currentTime = 0;
       setTimeout(1000); DScounter ++;
     }
   checkForCpuWin();
