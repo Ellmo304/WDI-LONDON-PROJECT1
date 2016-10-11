@@ -26,8 +26,9 @@ var myCR1counter = 0;
 var myCR2counter = 0;
 var myDScounter = 0;
 
-var $cpuCellChosen = "";
+var $cpuCellChosen = null;
 var $chosenCells = [];
+var hitIndex = null;
 
 $(".sea").text("SEA");
 $(".miss").text("MISS");
@@ -244,7 +245,7 @@ function cpuFire(){
       break;
     }
   if ($cpuCellChosen.hasClass("ship")) {
-  $cpuCellChosen.addClass("hit"); $cpuCellChosen.text("HIT");$cpuCellChosen.removeClass("ship");
+    hitIndex = $cpuCellChosen; $cpuCellChosen.addClass("hit"); $cpuCellChosen.text("HIT");$cpuCellChosen.removeClass("ship");
   }
   else {$cpuCellChosen.addClass("miss"); $cpuCellChosen.removeClass("sea"); }
     if (ACFCRcounter === 5) {
@@ -271,40 +272,41 @@ function cpuFire(){
 }
 //-------------------------------------------------------------
 function lookForShip() {
-  var randomIndex2 = Math.floor(Math.random() * 4);
+  var randomIndex2 = Math.ceil(Math.random() * 4);
+  var chosenIndex = 0;
   switch (randomIndex2) {
-    case 1 : $cpuCellChosen = $playersTiles.index($cpuCellChosen) +1;
+    case 1 : chosenIndex = $playersTiles.index($cpuCellChosen) + 1;
     break;
-    case 2 : $cpuCellChosen = $playersTiles.index($cpuCellChosen) -1;
+    case 2 : chosenIndex = $playersTiles.index($cpuCellChosen) - 1;
     break;
-    case 3 : $cpuCellChosen = $playersTiles.index($cpuCellChosen) +10;
+    case 3 : chosenIndex = $playersTiles.index($cpuCellChosen) + 10;
     break;
-    case 4 : $cpuCellChosen = $playersTiles.index($cpuCellChosen) -10;
+    case 4 : chosenIndex = $playersTiles.index($cpuCellChosen) - 10;
     break;
   }
-  console.log($cpuCellChosen);
-  if (($cpuCellChosen.hasClass("ship") || $cpuCellChosen.hasClass("sea")) || ($cpuCellChosen.hasClass(undefined))) {
+
+  $cpuCellChosen = $playersTiles.eq(chosenIndex);
+  if ($cpuCellChosen.length === 0) {
     lookForShip();
   }
   else {
-  cpuFire();
+    cpuFire();
   }
 }
 //---------------------------------------------------------------------
 
 function cpusChoice() {
   $cpuBoard.off('click');
-  if ($cpuCellChosen.text === "HIT") {
+  if ($cpuCellChosen && $cpuCellChosen.text() === "HIT") {
     lookForShip();
-  }
-  else {
+  } else {
     var randomIndex = Math.floor(Math.random() * $playersTiles.length);
     $cpuCellChosen = $playersTiles.eq(randomIndex);
-    if ($cpuCellChosen.hasClass("ship") || $cpuCellChosen.hasClass("sea")) {
+    if($cpuCellChosen.length === 1) {
       console.log($cpuCellChosen);
       cpuFire();
+    } else {
+      cpusChoice();
     }
-    else
-    cpusChoice();
   }
 }
