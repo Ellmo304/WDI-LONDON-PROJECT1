@@ -3,6 +3,9 @@ body {
   overflow: auto;
 }
 
+table {
+  table-layout: fixed;
+}
 #battleLog, #cpuBattleLog {
 height: 100px;
 width: 494px;
@@ -29,48 +32,62 @@ overflow: auto;
   padding: 10px;
 }
 
+tr {
+  width:500px;
+  height: 50px;
+}
+
 td {
   border: 1px solid black;
   width: 50px;
+  word-break:break-all;
   height: 50px;
-  color: black;
+
+  color: rgba(0,0,0,0);
+  overflow: hidden;
+
 }
 
 #playerBoard {
+  /*background-image: url("../images/oceanBG.xcf");*/
   background-color: lightblue;
-border: 5px solid lime;
-    display: inline-block;
+  border: 5px solid lime;
+  display: inline-block;
+
 
 }
 
 #cpuBoard {
+  /*background-image: url("../images/oceanBG.xcf");*/
   background-color: lightblue;
-    display: inline-block;
-    border: 5px solid lime;
+  display: inline-block;
+  border: 5px solid lime;
+
 }
 
 .hover {
-  background-color: lime;
+  background-image: url("../images/hoverIcon.png");
+  background-size: contain;
 }
 
 #playerBoard .ship {
   background-color: blue;
-  color: white;
+  color: rgba(0,0,0,0);
 }
 
 .sea {
-  color: white;
+color: rgba(0,0,0,0);
 
 }
 
 .hit {
   background-color: red;
-  color: white;
+  color: rgba transparent;
 }
 
 .miss {
   background-color: blue;
-  color: white;
+  color: rgba;
 }
 
 h1 {

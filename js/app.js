@@ -30,16 +30,29 @@ var $cpuCellChosen = null;
 var $chosenCells = [];
 var $hitIndex = null;
 
+var splashNoise = new Audio("../audio/splash.wav");
+var hitNoise = new Audio("../audio/hit.wav");
+var sonarNoise = new Audio("../audio/sonar.wav");
+var winNoise = new Audio("../audio/win.wav");
+var lossNoise = new Audio("../audio/loss.wav");
+var buttonOn = new Audio("../audio/buttonOn.wav");
+var buttonOff = new Audio("../audio/buttonOff.wav");
+
+
 $(".sea").text("SEA");
 $(".miss").text("MISS");
 $(".hit").text("HIT");
 
 
+
+
 $rotateBtn.on('click', function() {
+  buttonOn.play(); buttonOn.currentTime = 0;
   playerShipIsHorizontal = !playerShipIsHorizontal;
 });
 
 function selectShip() {
+  buttonOn.play(); buttonOn.currentTime = 0;
   shipsSelected++;
   ship = $(this).attr('id');
   $(this).prop('disabled', true);
@@ -62,7 +75,7 @@ function selectShip() {
 
   $playerBoard.on("click", "td", function() {
     if(placeShip($playersTiles.index(this), ship, playerShipIsHorizontal, $playersTiles)) {
-      $playerBoard.off("mouseout").off("mouseover");
+      $playerBoard.off("mouseout").off("mouseover"); buttonOff.play(); buttonOff.currentTime = 0;
     }
   });
 
@@ -134,6 +147,7 @@ while(!placeShipRandomly("DS", $cpuTiles));
 function checkForWin() {
   if (myACFCRcounter === 6 && myBTSPcounter === 5 && myCR1counter === 4 && myCR2counter === 4 && myDScounter === 3) {
     $cpuBoard.off('click');
+    winNoise.play();
     $battleLog.text("You've sunk the opposition!!! Player 1 IS VICTORIOUS!!!");
     $cpuBattleLog.text("CPU loses!!!");
   }
@@ -166,9 +180,11 @@ function isHit() {
     break;
   }
   if ($(this).hasClass("ship")) {
+    hitNoise.play(); hitNoise.currentTime = 0;
   $(this).addClass("hit"); $(this).text("HIT");$(this).removeClass("ship");
   }
-  else {$(this).addClass("miss"); $(this).removeClass("sea"); }
+  else {$(this).addClass("miss"); $(this).removeClass("sea");
+splashNoise.play(); splashNoise.currentTime = 0; }
   if (myACFCRcounter === 5) {
     $battleLog.text("You sank CPU'S aircraft carrier!");
     setTimeout(1000); myACFCRcounter ++;
@@ -202,6 +218,7 @@ function playersTurn() {
 
 function startGame() {         //function to start game upon start game being clicked, activates listeners on cpu board
   $(this).prop('disabled', true);
+  sonarNoise.play();
   $playerBoard.off('click');
   $battleLog.text("Opposition engaged, pick an enemy square to fire!");
   $cpuBattleLog.text("Enemy engaged!");
@@ -219,6 +236,7 @@ $("#playButton").on("click", startGame);
 
 function checkForCpuWin() {
   if (ACFCRcounter === 6 && BTSPcounter === 5 && CR1counter === 4 && CR2counter === 4 && DScounter === 3) {
+    lossNoise.play();
     $cpuBoard.off('click');
     $battleLog.text("All your ships have been sunk! You have been defeated!!!");
     $cpuBattleLog.text("CPU IS VICTORIOUS!!!");
@@ -232,7 +250,7 @@ function checkForCpuWin() {
 function cpuFire(){
   if ($cpuCellChosen.hasClass("ship")) {
   $hitIndex = $playersTiles.index($cpuCellChosen);}
-  
+
     switch ($cpuCellChosen.text()) {
       case "SEA" : $cpuBattleLog.text("No hits this time");
       break;
@@ -248,9 +266,12 @@ function cpuFire(){
       break;
     }
   if ($cpuCellChosen.hasClass("ship")) {
+    hitNoise.play(); hitNoise.currentTime = 0;
      $cpuCellChosen.addClass("hit"); $cpuCellChosen.text("HIT");$cpuCellChosen.removeClass("ship");
   }
-  else {$cpuCellChosen.addClass("miss"); $cpuCellChosen.removeClass("sea"); }
+  else { $cpuCellChosen.addClass("miss"); $cpuCellChosen.removeClass("sea");
+    splashNoise.play(); splashNoise.currentTime = 0; }
+
     if (ACFCRcounter === 5) {
       $cpuBattleLog.text("CPU sank your aircraft carrier!");
       setTimeout(1000); ACFCRcounter ++;
