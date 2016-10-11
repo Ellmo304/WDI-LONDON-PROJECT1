@@ -28,7 +28,7 @@ var myDScounter = 0;
 
 var $cpuCellChosen = null;
 var $chosenCells = [];
-var hitIndex = null;
+var $hitIndex = null;
 
 $(".sea").text("SEA");
 $(".miss").text("MISS");
@@ -230,6 +230,9 @@ function checkForCpuWin() {
 
 
 function cpuFire(){
+  if ($cpuCellChosen.hasClass("ship")) {
+  $hitIndex = $playersTiles.index($cpuCellChosen);}
+  
     switch ($cpuCellChosen.text()) {
       case "SEA" : $cpuBattleLog.text("No hits this time");
       break;
@@ -245,7 +248,7 @@ function cpuFire(){
       break;
     }
   if ($cpuCellChosen.hasClass("ship")) {
-    hitIndex = $cpuCellChosen; $cpuCellChosen.addClass("hit"); $cpuCellChosen.text("HIT");$cpuCellChosen.removeClass("ship");
+     $cpuCellChosen.addClass("hit"); $cpuCellChosen.text("HIT");$cpuCellChosen.removeClass("ship");
   }
   else {$cpuCellChosen.addClass("miss"); $cpuCellChosen.removeClass("sea"); }
     if (ACFCRcounter === 5) {
@@ -272,41 +275,52 @@ function cpuFire(){
 }
 //-------------------------------------------------------------
 function lookForShip() {
-  var randomIndex2 = Math.ceil(Math.random() * 4);
-  var chosenIndex = 0;
-  switch (randomIndex2) {
-    case 1 : chosenIndex = $playersTiles.index($cpuCellChosen) + 1;
-    break;
-    case 2 : chosenIndex = $playersTiles.index($cpuCellChosen) - 1;
-    break;
-    case 3 : chosenIndex = $playersTiles.index($cpuCellChosen) + 10;
-    break;
-    case 4 : chosenIndex = $playersTiles.index($cpuCellChosen) - 10;
-    break;
-  }
+  if ($hitIndex === true) {
+    if (($playersTiles.index($hitIndex) + 1).hasClass("sea") || ($playersTiles.index($hitIndex) + 1).hasClass("ship") || ($playersTiles.index($hitIndex) - 1).hasClass("sea") || ($playersTiles.index($hitIndex) - 1).hasClass("ship") || ($playersTiles.index($hitIndex) + 10).hasClass("sea") || ($playersTiles.index($hitIndex) + 10).hasClass("ship") || ($playersTiles.index($hitIndex) - 10).hasClass("sea") || ($playersTiles.index($hitIndex) - 10).hasClass("ship")) {
 
-  $cpuCellChosen = $playersTiles.eq(chosenIndex);
-  if ($cpuCellChosen.length === 0) {
-    lookForShip();
-  }
-  else {
-    cpuFire();
+      var randomIndex2 = Math.ceil(Math.random() * 4);
+      var chosenIndex = 0;
+      switch (randomIndex2) {
+        case 1 : chosenIndex = $playersTiles.index($cpuCellChosen) + 1;
+        break;
+        case 2 : chosenIndex = $playersTiles.index($cpuCellChosen) - 1;
+        break;
+        case 3 : chosenIndex = $playersTiles.index($cpuCellChosen) + 10;
+        break;
+        case 4 : chosenIndex = $playersTiles.index($cpuCellChosen) - 10;
+        break;
+      }
+
+      $cpuCellChosen = $playersTiles.eq(chosenIndex);
+      if ($cpuCellChosen.length === 0 || $cpuCellChosen.hasClass("hit") || $cpuCellChosen.hasClass("miss")) {
+        lookForShip();
+      }
+      else {
+        cpuFire();
+      }
+    }
+    else {
+      $hitIndex = false; cpusChoice();
+    }
   }
 }
 //---------------------------------------------------------------------
 
 function cpusChoice() {
   $cpuBoard.off('click');
-  if ($cpuCellChosen && $cpuCellChosen.text() === "HIT") {
+  if ($hitIndex === true) {
     lookForShip();
-  } else {
+  }
+  else {
     var randomIndex = Math.floor(Math.random() * $playersTiles.length);
     $cpuCellChosen = $playersTiles.eq(randomIndex);
-    if($cpuCellChosen.length === 1) {
+    if($cpuCellChosen.length !== 1 || $cpuCellChosen.hasClass("miss") || $cpuCellChosen.hasClass("hit")) {
       console.log($cpuCellChosen);
-      cpuFire();
-    } else {
+      $cpuCellChosen = "";
       cpusChoice();
+    }
+    else {
+     cpuFire();
     }
   }
 }
