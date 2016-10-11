@@ -26,15 +26,13 @@ var myCR1counter = 0;
 var myCR2counter = 0;
 var myDScounter = 0;
 
-var cpuGameIsWon = (ACFCRcounter === 5 && BTSPcounter === 4 && CR1counter === 3 && CR2counter === 3 && DScounter === 2);
-var gameIsWon = (myACFCRcounter === 5 && myBTSPcounter === 4 && myCR1counter === 3 && myCR2counter === 3 && myDScounter === 2);
-
 var $cpuCellChosen = "";
 var $chosenCells = [];
 
 $(".sea").text("SEA");
 $(".miss").text("MISS");
 $(".hit").text("HIT");
+
 
 $rotateBtn.on('click', function() {
   playerShipIsHorizontal = !playerShipIsHorizontal;
@@ -133,9 +131,9 @@ while(!placeShipRandomly("DS", $cpuTiles));
 
 
 function checkForWin() {
-  if (gameIsWon === true) {
+  if (myACFCRcounter === 6 && myBTSPcounter === 5 && myCR1counter === 4 && myCR2counter === 4 && myDScounter === 3) {
     $cpuBoard.off('click');
-    $battleLog.text("You've sunk the opposition!!!<br> Player 1 IS VICTORIOUS!!!");
+    $battleLog.text("You've sunk the opposition!!! Player 1 IS VICTORIOUS!!!");
     $cpuBattleLog.text("CPU loses!!!");
   }
   else {setTimeout(cpusChoice, 1000);
@@ -152,7 +150,7 @@ function checkForWin() {
 
 function isHit() {
 
-  switch ($(this).text) {
+  switch ($(this).text()) {
     case "SEA" : $battleLog.text("No hits this time");
     break;
     case "ACFCR" : $battleLog.text("Player 1 hits cpu's aircraft carrier!"); (myACFCRcounter ++);
@@ -171,25 +169,31 @@ function isHit() {
   }
   else {$(this).addClass("miss"); $(this).removeClass("sea"); }
   if (myACFCRcounter === 5) {
-    $battleLog.text("CPU sank your aircraft carrier!");
+    $battleLog.text("You sank CPU'S aircraft carrier!");
+    setTimeout(1000); myACFCRcounter ++;
   }
   else if (myBTSPcounter === 4) {
-    $battleLog.text("CPU sank your battleship!");
+    $battleLog.text("You sank CPU's battleship!");
+    setTimeout(1000); myBTSPcounter ++;
   }
   else if (myCR1counter === 3) {
-    $battleLog.text("CPU sank your cruiser!");
+    $battleLog.text("You sank CPU's cruiser!");
+    setTimeout(1000); myCR1counter ++;
   }
   else if (myCR2counter === 3) {
-    $battleLog.text("CPU sank your cruiser!");
+    $battleLog.text("You sank CPU's cruiser!");
+    setTimeout(1000); myCR2counter ++;
   }
   else if (myDScounter === 2) {
-    $battleLog.text("CPU sank your destroyer!");
+    $battleLog.text("You sank CPU's destroyer!");
+    setTimeout(1000); myDScounter ++;
   }
   checkForWin();
 }
 
 function playersTurn() {
   $cpuBoard.on("click", "td", isHit);
+  $battleLog.text("Player 1's turn to fire!!!");
   console.log($(this));// //click event listener for tiles on enemies board
 }
 
@@ -213,9 +217,9 @@ $("#playButton").on("click", startGame);
 
 
 function checkForCpuWin() {
-  if (cpuGameIsWon === true) {
+  if (ACFCRcounter === 6 && BTSPcounter === 5 && CR1counter === 4 && CR2counter === 4 && DScounter === 3) {
     $cpuBoard.off('click');
-    $battleLog.text("All your ships have been sunk! <BR> You have been defeated!!!");
+    $battleLog.text("All your ships have been sunk! You have been defeated!!!");
     $cpuBattleLog.text("CPU IS VICTORIOUS!!!");
   }
   else { setTimeout(playersTurn, 1000);
@@ -225,7 +229,7 @@ function checkForCpuWin() {
 
 
 function cpuFire(){
-    switch ($cpuCellChosen.text) {
+    switch ($cpuCellChosen.text()) {
       case "SEA" : $cpuBattleLog.text("No hits this time");
       break;
       case "ACFCR" : $cpuBattleLog.text("CPU hits player 1's aircraft carrier!"); (ACFCRcounter ++);
@@ -245,18 +249,23 @@ function cpuFire(){
   else {$cpuCellChosen.addClass("miss"); $cpuCellChosen.removeClass("sea"); }
     if (ACFCRcounter === 5) {
       $cpuBattleLog.text("CPU sank your aircraft carrier!");
+      setTimeout(1000); ACFCRcounter ++;
     }
     else if (BTSPcounter === 4) {
       $cpuBattleLog.text("CPU sank your battleship!");
+      setTimeout(1000); BTSPcounter ++;
     }
     else if (CR1counter === 3) {
       $cpuBattleLog.text("CPU sank your cruiser!");
+      setTimeout(1000); CR1counter ++;
     }
     else if (CR2counter === 3) {
       $cpuBattleLog.text("CPU sank your cruiser!");
+      setTimeout(1000); CR2counter ++;
     }
     else if (DScounter === 2) {
       $cpuBattleLog.text("CPU sank your destroyer!");
+      setTimeout(1000); DScounter ++;
     }
   checkForCpuWin();
 }
@@ -274,7 +283,7 @@ function lookForShip() {
     break;
   }
   console.log($cpuCellChosen);
-  if (($chosenCells.indexOf($cpuCellChosen) !== -1) || ($cpuCellChosen.class === undefined)) {
+  if (($cpuCellChosen.hasClass("ship") || $cpuCellChosen.hasClass("sea")) || ($cpuCellChosen.hasClass(undefined))) {
     lookForShip();
   }
   else {
@@ -291,9 +300,8 @@ function cpusChoice() {
   else {
     var randomIndex = Math.floor(Math.random() * $playersTiles.length);
     $cpuCellChosen = $playersTiles.eq(randomIndex);
-    if ($chosenCells.indexOf($cpuCellChosen) === -1) {
-      $chosenCells.push($cpuCellChosen);
-      console.log($chosenCells);
+    if ($cpuCellChosen.hasClass("ship") || $cpuCellChosen.hasClass("sea")) {
+      console.log($cpuCellChosen);
       cpuFire();
     }
     else
