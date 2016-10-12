@@ -28,7 +28,7 @@ var myDScounter = 0;
 
 var $cpuCellChosen = null;
 var $chosenCells = [];
-var $hitIndex = null;
+var $hitIndex = "";
 
 var splashNoise = new Audio("../audio/splash.wav");
 var hitNoise = new Audio("../audio/hit.wav");
@@ -256,8 +256,6 @@ function checkForCpuWin() {
 
 
 function cpuFire(){
-  if ($cpuCellChosen.hasClass("ship")) {
-  $hitIndex = $playersTiles.index($cpuCellChosen);}
 
     switch ($cpuCellChosen.text()) {
       case "SEA" : $cpuBattleLog.text("No hits this time");
@@ -305,27 +303,29 @@ function cpuFire(){
       shipSunk.play(); shipSunk.currentTime = 0;
       setTimeout(1000); DScounter ++;
     }
-  checkForCpuWin();
+    if ($cpuCellChosen.hasClass("hit")) {
+    $hitIndex = $playersTiles.index($cpuCellChosen);}
+    checkForCpuWin();
 }
 //-------------------------------------------------------------
 function lookForShip() {
-  if ($hitIndex === true) {
+
     if (($playersTiles.index($hitIndex) + 1).hasClass("sea") || ($playersTiles.index($hitIndex) + 1).hasClass("ship") || ($playersTiles.index($hitIndex) - 1).hasClass("sea") || ($playersTiles.index($hitIndex) - 1).hasClass("ship") || ($playersTiles.index($hitIndex) + 10).hasClass("sea") || ($playersTiles.index($hitIndex) + 10).hasClass("ship") || ($playersTiles.index($hitIndex) - 10).hasClass("sea") || ($playersTiles.index($hitIndex) - 10).hasClass("ship")) {
 
       var randomIndex2 = Math.ceil(Math.random() * 4);
-      var chosenIndex = 0;
+      var $chosenIndex = 0;
       switch (randomIndex2) {
-        case 1 : chosenIndex = $playersTiles.index($cpuCellChosen) + 1;
+        case 1 : $chosenIndex = $playersTiles.index($hitIndex) + 1;
         break;
-        case 2 : chosenIndex = $playersTiles.index($cpuCellChosen) - 1;
+        case 2 : $chosenIndex = $playersTiles.index($hitIndex) - 1;
         break;
-        case 3 : chosenIndex = $playersTiles.index($cpuCellChosen) + 10;
+        case 3 : $chosenIndex = $playersTiles.index($hitIndex) + 10;
         break;
-        case 4 : chosenIndex = $playersTiles.index($cpuCellChosen) - 10;
+        case 4 : $chosenIndex = $playersTiles.index($hitIndex) - 10;
         break;
       }
 
-      $cpuCellChosen = $playersTiles.eq(chosenIndex);
+      $cpuCellChosen = $playersTiles.eq($chosenIndex);
       if ($cpuCellChosen.length === 0 || $cpuCellChosen.hasClass("hit") || $cpuCellChosen.hasClass("miss")) {
         lookForShip();
       }
@@ -336,7 +336,7 @@ function lookForShip() {
     else {
       $hitIndex = false; cpusChoice();
     }
-  }
+
 }
 //---------------------------------------------------------------------
 
