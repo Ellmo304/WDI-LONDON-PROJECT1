@@ -17,6 +17,7 @@ body {
 table {
   table-layout: fixed;
 }
+
 #battleLog, #cpuBattleLog {
 height: 100px;
 width: 494px;
@@ -60,10 +61,8 @@ td {
   width: 50px;
   word-break:break-all;
   height: 50px;
-
   color: rgba(0,0,0,0);
   overflow: hidden;
-
 }
 
 #playerBoard {
@@ -72,8 +71,6 @@ td {
   border: 5px solid lime;
   display: inline-block;
   box-shadow: 6px 6px 5px #888888;
-
-
 }
 
 #cpuBoard {
@@ -82,7 +79,6 @@ td {
   display: inline-block;
   border: 5px solid lime;
   box-shadow: -6px 6px 5px #888888;
-
 }
 
 .hover {
@@ -98,7 +94,6 @@ td {
 
 .sea {
 color: rgba(0,0,0,0);
-
 }
 
 .hit {
@@ -126,7 +121,8 @@ h1 {
 }
 
 #cpuHeader {
-  margin-left: 400px;}
+  margin-left: 400px;
+}
 
 button {
   display: inline-block;
